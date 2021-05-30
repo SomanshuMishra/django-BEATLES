@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Search{% endblock title %}
+{% block head %}
+<style>
+    #Formid{
+        list-style: none;
+        width: 90%;
+        height: 30px;
+        margin: 0;
+        padding: 0;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+</style> 
+{% endblock head %}
+{% block body %}
+<div class="container">
+<h1 class="mx-5 my-2">Search Results :</h1>
+
+
+<hr>
+{% if allPosts|length < 1  %}
+<h5>No data In our DataBase</h5>
+{% endif %}
+{% for post in allPosts %}
+
+<div class="jumbotron">
+<h3 >{{post.title}}</h3>
+<h6>Author :- {{post.author}}</h6>
+<p>{{post.timeStamp}}</p>
+<p>{{post.content|truncatechars:300}}</p>
+<a href="/posts/{{post.slug}}"><button class="btn btn-primary"  >Continue reading</button></a>
+</div>
+
+
+{% endfor %}
+</div>
+<script>
+            //invoke background fadein on page load
+            $("body").hide()
+            $("body").fadeOut(1500);
+            $("body").fadeIn(1500);
+
+</script>
+{% endblock body %}

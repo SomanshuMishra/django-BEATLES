@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}Home{% endblock title %}
+{% block homeactive %}active{% endblock homeactive %}
+{% block signup %}
+<button type="button" class="btn btn-outline-primary mx-2" data-bs-toggle="modal" data-bs-target="#signupModal">
+    Sign Up
+</button>
+{% endblock signup %}
+{% block login %}
+<button type="button" class="btn btn-outline-primary mx-2" data-bs-toggle="modal" data-bs-target="#loginModal">
+    LogIn
+</button>
+
+{% endblock login %}
+{% block body %}
+
+
+<div class="p-4 p-md-5 mb-4 text-white rounded bg-secondary my-1 ">
+    <div class="col-md-6 px-0">
+      <h1 class="display-4 ">Welcome to BEATLES</h1>
+      <p class="lead my-3">To know more about BEATLES ,click on about in navigation . </p>
+      <p class="lead mb-0"><a href="/posts  " class="text-white fw-bold">Continue to Posts</a></p>
+    </div>
+  </div>
+<h2>Latest Post :</h2>
+{% for post in latest_post  %}
+<div class="jumbotron p-4 p-md-5 mb-4 m-5 my-4 ">
+<h3 >{{post.title}}</h3>
+<h6>Author :- {{post.author}}</h6>
+<p>{{post.timeStamp | naturaltime }}</p>
+<p>{{post.content|truncatechars:300}}</p>
+<a href="/posts/{{post.slug}}/"><button class="btn btn-primary"  >Continue reading</button></a>
+</div>
+<script>
+            //invoke background fadein on page load
+            $("body").hide()
+            $("body").fadeOut(1500);
+            $("body").fadeIn(1500);
+
+        </script>
+
+{% endfor %}
+{% endblock body %}
